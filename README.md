@@ -1,5 +1,8 @@
 # Nodejs Task
 
+1. Post ID should start from 1000 and be incremental.
+   - I am thinking this way ==> The post ID the user gives while creating a new post should be greater than 10000
+
 TO install the app in your machine install the following applications
 
 - Git

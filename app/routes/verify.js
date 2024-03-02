@@ -1,5 +1,9 @@
 const Post = require("../db/postsModel");
 const User = require("../db/user.registerModel");
+const {
+  defineAdminAbilities,
+  defineEditorAbilities,
+} = require("./defineAbility");
 
 const verifyLoggedInUser = (req, res, next) => {
   const token = req.headers("Authorization");
@@ -19,9 +23,8 @@ const verifyUsersPostandAdmin = async (req, _, next) => {
   try {
     const post = await Post.findById(id);
     const user = await User.findById(userId);
-    console.log(user);
-    console.log(post);
     if (post.ownerId == userId || user.role == "admin") {
+      req.abilities = defineAdminAbilities();
       next();
     } else {
       throw Error("Unauthorized request");
@@ -37,6 +40,7 @@ const verifyEditorandPost = async (req, res, next) => {
   try {
     const post = await Post.findById(id);
     if (post.editors.includes(userId)) {
+      req.abilities = defineEditorAbilities();
       next();
     } else {
       throw Error("Unauthorized request");
@@ -82,10 +86,12 @@ const verifyUserPostandEditor = async (req, res, next) => {
 
     const post = await Post.findById(id);
     if (post.editors.includes(userId)) {
+      req.abilities = defineEditorAbilities();
       next();
     } else if (post.ownerId != userId || user.role != "admin") {
       throw new Error("Unauthorized request");
     } else {
+      req.abilities = defineAdminAbilities();
       next();
     }
   } catch (error) {
