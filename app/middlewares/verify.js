@@ -1,9 +1,4 @@
 const Post = require("../db/postsModel");
-const User = require("../db/user.registerModel");
-const {
-  defineAdminAbilities,
-  defineEditorAbilities,
-} = require("./defineAbility");
 
 const verifyLoggedInUser = (req, res, next) => {
   const token = req.headers("Authorization");
@@ -17,7 +12,7 @@ const verifyLoggedInUser = (req, res, next) => {
   }
 };
 
-const verifyUsersPostandAdmin = async (req, _, next) => {
+const verifyUsersPostandAdmin = async (req, res, next) => {
   const id = req.params?.id;
   const userId = req?.userId;
   try {
@@ -65,7 +60,7 @@ const verifyPostOnlyAfterTime = async (req, res, next) => {
   }
 };
 
-const verifyPostId = (req, _, next) => {
+const verifyPostId = (req, res, next) => {
   const { id } = req.params;
   try {
     if (id > 1000) {

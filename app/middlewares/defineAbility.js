@@ -11,7 +11,7 @@ const defineAdminAbilities = (can, cannot) => {
 const defineEditorAbilities = (can, cannot) => {
   can("edit", "Post");
   can("view", "Post");
-  
+
   can("add", "Tag");
   cannot("delete", "Post");
   cannot("assign", "Editor");
@@ -24,7 +24,7 @@ const defineViewerAbilities = (can, cannot) => {
   cannot("assign", "Editor");
 };
 
-module.exports = {
+exports = {
   defineEditorAbilities,
   defineViewerAbilities,
   defineAdminAbilities,

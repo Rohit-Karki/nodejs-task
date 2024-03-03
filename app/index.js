@@ -1,4 +1,6 @@
 require("dotenv").config();
+const { Error } = require("mongoose");
+import { NextFunction, Request, Response } from "express";
 const express = require("express"),
   swaggerJsdoc = require("swagger-jsdoc"),
   swaggerUi = require("swagger-ui-express");
@@ -8,7 +10,6 @@ const app = express();
 const postsRouter = require("./routes/posts");
 const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
-const { verifyLoggedInUser } = require("./middlewares/verify");
 
 app.use(cors());
 app.use(express.json());
@@ -17,8 +18,8 @@ mongoose
   .then(() => {
     console.log("successfully connected");
   })
-  .catch((err) => {
-    console.log(`error ${err}`);
+  .catch((error) => {
+    console.log(`error ${error}`);
   });
 
 app.use("/register", registerRouter);

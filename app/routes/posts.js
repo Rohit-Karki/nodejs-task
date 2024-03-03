@@ -1,3 +1,4 @@
+const z = require("zod");
 const express = require("express");
 const {
   verifyEditorandPost,
@@ -7,11 +8,15 @@ const {
   verifyUserPostandEditor,
   verifyTimePeriod,
   verifyLoggedInUser,
-} = require("../middlewares/verify");
-const Post = require("../db/postsModel");
-const { default: mongoose } = require("mongoose");
-const router = express.Router();
+} = reuire("../middlewares/verify");
 
+const postSchema = z.object({
+  id: z.number().min(10000),
+  content: z.string(),
+  tags: z.string().array(),
+  ownerId: z.string().min(1),
+  editors: z.string().array(),
+});
 /**
  * @swagger
  * components:
@@ -209,6 +214,11 @@ router.post(
   async (req, res) => {
     const id = Number(req.params?.id);
     const ownerId = req.userId;
+    const { error, value } = postSchema.validate(req.body);
+
+    if (error) {
+      next(error);
+    }
     const post = {
       ...req.body,
       id: id,
@@ -227,6 +237,7 @@ router.put(
   verifyUserPostandEditor,
   async (req, res) => {
     const { id } = req.params;
+
     const updatedPost = await Post.findByIdAndUpdate(
       id,
       {
