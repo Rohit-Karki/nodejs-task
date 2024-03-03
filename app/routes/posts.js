@@ -139,7 +139,7 @@ router.get("/", async (req, res) => {
     totalPages: Math.ceil(count / limit),
     currentPage: page,
     previousPage: page - 1 > 0 ? page - 1 : page,
-    nextPage: page + 1 > Math.ceil(count / limit) ? page + 1 : page,
+    nextPage: page + 1 < Math.ceil(count / limit) ? page + 1 : page,
   });
 });
 
