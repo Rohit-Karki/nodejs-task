@@ -6,10 +6,14 @@ Follow the steps
 - Git
   `git clone `
   Start Hacking
+
 - Nodejs
   `cd app`
+  
   `npm install` This install all the dependencies
+  
   `populate the environment variables`
+  
   `npm run swagger-autogen` This runs the swagger UI which can be viewed from http://localhost:8080/api-docs
 
 Libraries Used:
@@ -25,12 +29,15 @@ Requirements:
 TO install the app in your machine install the following applications
 
 - Git
-  `git clone `
-  Start Hacking
+  `git clone ` Start Hacking
+
 - Nodejs
   `cd app`
+
   `npm install` This install all the dependencies
+
   `populate the environment variables`
+
   `npm run dev` This runs tha application in dev mode
 
 To run the app in your machine install the following applications
