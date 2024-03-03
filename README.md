@@ -9,8 +9,11 @@ Follow the steps
 
 - Nodejs
   `cd app`
+  
   `npm install` This install all the dependencies
+  
   `populate the environment variables`
+  
   `npm run swagger-autogen` This runs the swagger UI which can be viewed from http://localhost:8080/api-docs
 
 Libraries Used:
